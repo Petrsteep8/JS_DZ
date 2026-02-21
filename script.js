@@ -308,4 +308,177 @@ document.addEventListener("DOMContentLoaded", () => {
     t16Box.classList.toggle('is-bouncing');
     t16Animate.textContent = t16Box.classList.contains('is-bouncing') ? "Остановить" : "Анимировать";
   });
+
+  function createDiv(x, y){
+    let div = document.createElement("div")
+    div.className = "target-div"
+    div.style.left = `${x}px`
+    div.style.top = `${y}px`
+    return div
+  }
+
+  function task17(){
+    let area = document.querySelector('[data-js="t17-area"]')
+    setInterval(() => {
+      let block = createDiv(0, 0)
+      area.appendChild(block)
+      let blockWidth = block.offsetWidth
+      let blockHeight = block.offsetHeight
+      let maxX = Math.max(0, area.clientWidth - blockWidth)
+      let maxY = Math.max(0, area.clientHeight - blockHeight)
+      let xPosition = Math.floor(Math.random() * (maxX + 1))
+      let yPosition = Math.floor(Math.random() * (maxY + 1))
+      block.style.left = `${xPosition}px`
+      block.style.top = `${yPosition}px`
+    }, 1000)
+  }
+  task17()
+
+  function task18(){
+    let area = document.querySelector('[data-js="t18-area"]')
+    let x = area.clientWidth
+    let block = createDiv(x, 100)
+    area.appendChild(block)
+    
+    function animate() {
+        x -= 50;
+        block.style.left = `${x}px`;
+        
+        if ((x + 100) < 0) {
+          block.remove()
+          task18()
+        }
+        else{
+          requestAnimationFrame(animate);
+        }
+    }
+    requestAnimationFrame(animate);
+  }
+  task18()
+
+  function task19(){
+    let area = document.querySelector('[data-js="t19-area"]')
+    let x = area.clientWidth
+    let randomInt = Math.floor(Math.random() * 200) + 1;
+    let block = createDiv(x, randomInt)
+    area.appendChild(block)
+    function animate() {
+        x -= 100;
+        block.style.left = `${x}px`;
+        
+        if ((x + 100) < 0) {
+          block.remove()
+          task19()
+        }
+        else{
+          requestAnimationFrame(animate);
+        }
+    }
+    requestAnimationFrame(animate);
+  }
+  task19()
+
+  let scoreInt = 0
+  function task20(){
+    let area = document.querySelector('[data-js="t20-area"]')
+    let score = document.querySelector('[data-js="t20-score"]')
+    let x = area.clientWidth
+    let randomInt = Math.floor(Math.random() * 200) + 1;
+    let block = createDiv(x, randomInt)
+    area.appendChild(block)
+    function animate() {
+        x -= 10;
+        block.style.left = `${x}px`;
+        
+        if ((x + 100) < 0) {
+          block.remove()
+          task20()
+        }
+        else{
+          requestAnimationFrame(animate);
+        }
+    }
+    requestAnimationFrame(animate);
+    block.addEventListener("click", () =>{
+      scoreInt += 1
+      score.textContent = `${scoreInt}`
+      block.remove()
+    })
+  }
+  task20();
+
+  let score21 = 0;
+  let lives21 = 3;
+  let gameActive21 = true;
+  let interval21;
+
+  function task21(){
+    let area = document.querySelector('[data-js="t21-area"]');
+    let scoreSpan = document.querySelector('[data-js="t21-score"]');
+    let livesSpan = document.querySelector('[data-js="t21-lives"]');
+    let gameOver = document.querySelector('[data-js="t21-game-over"]');
+    let restartBtn = document.querySelector('[data-js="t21-restart"]');
+
+    function createMovingBlock() {
+      if (!gameActive21) return;
+      
+      let x = area.clientWidth;
+      let randomY = Math.floor(Math.random() * (area.clientHeight - 100));
+      let block = createDiv(x, randomY);
+      area.appendChild(block);
+      
+      let isRemoved = false;
+      
+      function animate() {
+        if (!gameActive21 || isRemoved) return;
+        
+        x -= 10;
+        block.style.left = `${x}px`;
+        
+        if ((x + 100) < 0) {
+          block.remove();
+          isRemoved = true;
+          lives21--;
+          livesSpan.textContent = lives21;
+          
+          if (lives21 <= 0) {
+            gameActive21 = false;
+            clearInterval(interval21);
+            gameOver.hidden = false;
+          }
+        } else {
+          requestAnimationFrame(animate);
+        }
+      }
+      
+      block.addEventListener("click", function() {
+        if (!gameActive21 || isRemoved) return;
+        score21++;
+        scoreSpan.textContent = score21;
+        block.remove();
+        isRemoved = true;
+      });
+      
+      requestAnimationFrame(animate);
+    }
+
+    restartBtn.addEventListener("click", function() {
+      gameActive21 = true;
+      score21 = 0;
+      lives21 = 3;
+      scoreSpan.textContent = "0";
+      livesSpan.textContent = "3";
+      gameOver.hidden = true;
+      
+      document.querySelectorAll('[data-js="t21-area"] .target-div').forEach(b => b.remove());
+      
+      clearInterval(interval21);
+      interval21 = setInterval(createMovingBlock, 1000);
+    });
+
+    interval21 = setInterval(createMovingBlock, 1000);
+  }
+
+  task21();
+
 });
