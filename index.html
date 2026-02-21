@@ -439,6 +439,151 @@
         </div>
       </div>
     </section>
+
+    <section class="task" id="task-17">
+      <div class="task__header">
+        <h2 class="task__title">Задача 17 — Спавн блоков в области</h2>
+        <span
+          class="hint"
+          tabindex="0"
+          aria-label="Подсказка"
+          title="Возьми область через querySelector. Каждую секунду (setInterval) создавай div через document.createElement, задай width/height 100px и background: #111, затем append в область."
+          >?</span
+        >
+      </div>
+      <p class="task__desc">
+        Блоки просто появляются в области каждые 1 секунду со случайными
+        координатами.
+      </p>
+      <div class="task__work">
+        <div class="task-area">
+          <div
+            class="game-area"
+            data-js="t17-area"
+            aria-label="Область задачи 17"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="task" id="task-18">
+      <div class="task__header">
+        <h2 class="task__title">Задача 18 — Движение справа налево</h2>
+        <span
+          class="hint"
+          tabindex="0"
+          aria-label="Подсказка"
+          title="Спавн: x = area.clientWidth (старт за правой границей). Движение: requestAnimationFrame, каждый кадр уменьшай x. Удаление: когда x + 100 < 0, remove()."
+          >?</span
+        >
+      </div>
+      <p class="task__desc">
+        Блоки едут справа налево, стартуют за правой границей и удаляются слева.
+      </p>
+      <div class="task__work">
+        <div class="task-area">
+          <div
+            class="game-area"
+            data-js="t18-area"
+            aria-label="Область задачи 18"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="task" id="task-19">
+      <div class="task__header">
+        <h2 class="task__title">Задача 19 — Случайная высота старта</h2>
+        <span
+          class="hint"
+          tabindex="0"
+          aria-label="Подсказка"
+          title="Для вертикали вычисляй случайный y: Math.floor(Math.random() * (area.clientHeight - 100)). top задавай в px, left/удаление оставь как в прошлом задании."
+          >?</span
+        >
+      </div>
+      <p class="task__desc">
+        Блоки двигаются так же, но стартуют на разных высотах.
+      </p>
+      <div class="task__work">
+        <div class="task-area">
+          <div
+            class="game-area"
+            data-js="t19-area"
+            aria-label="Область задачи 19"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="task" id="task-20">
+      <div class="task__header">
+        <h2 class="task__title">Задача 20 — Очки за клик</h2>
+        <span
+          class="hint"
+          tabindex="0"
+          aria-label="Подсказка"
+          title="Повесь click на каждый блок: score += 1, обнови textContent счетчика, затем удали кликнутый блок. Удобно хранить score в отдельной переменной."
+          >?</span
+        >
+      </div>
+      <p class="task__desc">
+        Кликайте по блокам: за каждый клик начисляется очко и блок исчезает.
+      </p>
+      <div class="task__work">
+        <div class="task-area">
+          <output class="pill mono"
+            >Счёт: <span data-js="t20-score">0</span></output
+          >
+          <div
+            class="game-area"
+            data-js="t20-area"
+            aria-label="Область задачи 20"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="task" id="task-21">
+      <div class="task__header">
+        <h2 class="task__title">Задача 21 — Жизни и перезапуск</h2>
+        <span
+          class="hint"
+          tabindex="0"
+          aria-label="Подсказка"
+          title="Добавь lives = 3. Когда блок улетел за левую границу — lives -= 1 и обнови UI. При lives === 0 останови setInterval/requestAnimationFrame, покажи overlay и кнопку restart (сброс состояния и новый запуск)."
+          >?</span
+        >
+      </div>
+      <p class="task__desc">
+        Пропустите 3 блока — игра закончится. Нажмите кнопку, чтобы начать
+        заново.
+      </p>
+      <div class="task__work">
+        <div class="task-area">
+          <div class="row">
+            <output class="pill mono"
+              >Счёт: <span data-js="t21-score">0</span></output
+            >
+            <output class="pill mono"
+              >Жизни: <span data-js="t21-lives">3</span></output
+            >
+          </div>
+          <div
+            class="game-area"
+            data-js="t21-area"
+            aria-label="Область задачи 21"
+          >
+            <div class="game-over" data-js="t21-game-over" hidden>
+              <p class="game-over__title">Игра окончена</p>
+              <button class="btn" data-js="t21-restart" type="button">
+                Перезапустить
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <script src="./tooltip.js" defer></script>
     <script src="./script.js" defer></script>
   </body>
